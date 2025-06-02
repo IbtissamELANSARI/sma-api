@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('secteurs', function (Blueprint $table) {
+        Schema::create('demandes', function (Blueprint $table) {
             $table->id();
-            $table->string('intitule');
-            $table->string('code');
+            $table->string('type_doc');
+            $table->text('motif');
+            $table->foreignId('stagiaire_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
-
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('secteurs');
+        Schema::dropIfExists('demandes');
     }
 };

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('secteurs', function (Blueprint $table) {
+        Schema::create('formateurs', function (Blueprint $table) {
             $table->id();
-            $table->string('intitule');
-            $table->string('code');
+            $table->string('matricule')->unique();
+            $table->string('nom');
+            $table->string('email')->unique();
+            $table->foreignId('secteur_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('secteurs');
+        Schema::dropIfExists('formateurs');
     }
 };

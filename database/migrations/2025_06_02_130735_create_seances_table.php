@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('secteurs', function (Blueprint $table) {
+        Schema::create('seances', function (Blueprint $table) {
             $table->id();
-            $table->string('intitule');
-            $table->string('code');
+            $table->string('weekday');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->foreignId('formateur_id')->constrained()->onDelete('cascade');
+            $table->foreignId('groupe_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('secteurs');
+        Schema::dropIfExists('seances');
     }
 };

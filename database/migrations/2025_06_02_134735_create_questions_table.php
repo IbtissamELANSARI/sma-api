@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('secteurs', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('intitule');
-            $table->string('code');
+            $table->text('text_question');
+            $table->json('options'); // JSON array of choices
+            $table->string('correct_option');
+            $table->integer('score');
+            $table->foreignId('competence_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('secteurs');
+        Schema::dropIfExists('questions');
     }
 };

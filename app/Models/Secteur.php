@@ -35,4 +35,10 @@ class Secteur extends Model
     {
         return [];
     }
+
+
+    public function filieres()
+    {
+        return $this->hasMany(Filiere::class);
+    }
 }
